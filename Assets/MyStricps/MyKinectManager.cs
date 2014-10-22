@@ -144,6 +144,8 @@ public class MyKinectManager : MonoBehaviour
 	private BoneOrientationsConstraint boneConstraintsFilter = null;
 	//private BoneOrientationsFilter boneOrientationFilter = null;
 
+
+
 	// returns the single KinectManager instance
     public static MyKinectManager Instance
     {
@@ -1135,13 +1137,14 @@ public class MyKinectManager : MonoBehaviour
 //			}
 		}
     }
-	
+
+	public int indexi =0;
+	public bool BeenTopeople= false;
+	float delttime = 0;
 	void Update() 
 	{
 		if(kinectInitialized)
 		{
-
-			
 			if(computeUserMap)
 			{
 				if(KinectInterop.PollDepthFrame(sensorData))
@@ -1162,6 +1165,31 @@ public class MyKinectManager : MonoBehaviour
 				if(KinectInterop.PollColorFrame(sensorData))
 				{
 					UpdateColorMap();
+
+					int index;
+					if(alUserIds.Count>0)
+					{
+						if(BeenTopeople==false)
+						{
+							delttime += Time.deltaTime;
+							if(delttime>0.2f)
+							{
+								delttime = 0;
+								indexi = (indexi+1)%alUserIds.Count;
+
+							}
+						}
+
+
+						Int64 liUserId = alUserIds[Math.Min(alUserIds.Count,indexi)];
+						index = dictUserIdToIndex[liUserId];
+						
+							
+						if(index >= 0 && index < KinectInterop.Constants.BodyCount)
+						{
+							DrawSkeletonInColor(usersClrTex, ref bodyFrame.bodyData[index]);
+						}
+					}
 				}
 			}
 
@@ -1261,23 +1289,16 @@ public class MyKinectManager : MonoBehaviour
 			
 		}
 	}
-	
+
+
+
 	// Update the color image
 	void UpdateColorMap()
 	{
 		//usersClrTex.SetPixels32(colorImage.pixels);
 		usersClrTex.LoadRawTextureData(sensorData.colorImage);
 
-			for(int i = 0; i < alUserIds.Count; i++)
-			{
-				Int64 liUserId = alUserIds[i];
-				int index = dictUserIdToIndex[liUserId];
-				
-				if(index >= 0 && index < KinectInterop.Constants.BodyCount)
-				{
-					DrawSkeletonInColor(usersClrTex, ref bodyFrame.bodyData[index]);
-				}
-			}
+			
 
 		usersClrTex.Apply();
 

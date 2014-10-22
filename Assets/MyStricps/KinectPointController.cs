@@ -84,7 +84,7 @@ public class KinectPointController : MonoBehaviour {
 	public BoneMask Mask = BoneMask.All;
 	 dragmouse tempdrag;
 	public GUITexture guge;
-	
+	MyKinectManager MkM;
 	// Use this for initialization
 	void Start () {
 		//store bones in a list for easier access
@@ -101,6 +101,7 @@ public class KinectPointController : MonoBehaviour {
 		GP.a = 1;
 		WS.A=1;
 		tempdrag = (dragmouse)GetDebugPlane.GetComponent<dragmouse>();//GameObject.GetComponent<T>()GetComponent("dragmouse")
+		MkM = (MyKinectManager)Maincamera.GetComponent<MyKinectManager> ();
 	}
 	
 	// Update is called once per frame
@@ -140,6 +141,8 @@ public class KinectPointController : MonoBehaviour {
 		//如果一秒内，都没有数据，说明绝对没有人，绑定结束，吧模型和鼠标放到看不到的地方，背景打开
 		if(TimeCount >2)
 			{
+			MkM.BeenTopeople = false;
+
 			GP.a = 1;
 			WS.A=1;
 			
@@ -161,9 +164,9 @@ public class KinectPointController : MonoBehaviour {
 		Vector3 tempscreenpos = Maincamera.WorldToScreenPoint(_bones[1].transform.position);
 		//如果上一次的骨骼位置没有发生变化，说明可能没有人，开始TimeCount计时
         //if ((_bones[6].transform.position ==LastVector)||(_bones[7].transform.position.y<_bones[1].transform.position.y+Stopfloat &&_bones[11].transform.position.y<_bones[1].transform.position.y+Stopfloat)||_bones[1].transform.localPosition.z>Maxdis)//||!(ScreenVector.x>Maincamera.pixelWidth*0.3&&ScreenVector.x<Maincamera.pixelWidth*0.7&&ScreenVector.y>Maincamera.pixelHeight*0.3&&ScreenVector.y<Maincamera.pixelHeight*0.7))
-		if(Maincamera.GetComponent<MyKinectManager>().IsUserGet()==0||(Maincamera.GetComponent<MyKinectManager>().IsUserGet()>0&&((tempscreenpos.x<Maincamera.pixelWidth*0.3||tempscreenpos.x>Maincamera.pixelWidth*0.7)||(_bones[7].transform.position.y<_bones[12].transform.position.y+Stopfloat&&_bones[11].transform.position.y<_bones[16].transform.position.y+Stopfloat))))
+		if(Maincamera.GetComponent<MyKinectManager>().IsUserGet()==0||(Maincamera.GetComponent<MyKinectManager>().IsUserGet()>0&&((tempscreenpos.x<Maincamera.pixelWidth*0.1||tempscreenpos.x>Maincamera.pixelWidth*0.9)||(_bones[7].transform.position.y<_bones[12].transform.position.y+Stopfloat&&_bones[11].transform.position.y<_bones[16].transform.position.y+Stopfloat))))
 		{
-			
+
             TimeCount += Time.deltaTime;
 			//Debug.Log(TimeCount+":"+Maincamera.GetComponent<MyKinectManager>().IsUserGet());
             
@@ -278,6 +281,7 @@ public class KinectPointController : MonoBehaviour {
 //						    Debug.Log(screenPos.ToString());
 							if(screenPos.x>Maincamera.pixelWidth*0.4&&screenPos.x<Maincamera.pixelWidth*0.6&&screenPos.y>Maincamera.pixelHeight*0.55&&screenPos.y<Maincamera.pixelHeight*0.7)
 							{
+								MkM.BeenTopeople = true;
 								IsEnabled = true;
 							}
 						}
