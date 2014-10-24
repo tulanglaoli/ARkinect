@@ -69,10 +69,10 @@ public class WtoStest : MonoBehaviour {
 		ButtonTexture[3].GetComponent<GUITexture>().texture= sens01texture;
 		Tempchangecolor=(changecolor)changecolor.GetComponent<changecolor>();
 		ButtonTexture[5].transform.localPosition = new Vector3(0.1f,(0.70f-buttonheight),1f);
-		ButtonTexture[1].transform.localPosition = new Vector3(0.2f,(0.83f-buttonheight),1f);;
-		ButtonTexture[0].transform.localPosition = new Vector3(0.38f,(0.90f-buttonheight),1f);;
-		ButtonTexture[3].transform.localPosition = new Vector3(0.62f,(0.90f-buttonheight),1f);;
-		ButtonTexture[4].transform.localPosition = new Vector3(0.8f,(0.83f-buttonheight),1f);;
+		ButtonTexture[1].transform.localPosition = new Vector3(0.1f,(0.70f-buttonheight),1f);;
+		ButtonTexture[0].transform.localPosition = new Vector3(0.28f,(0.83f-buttonheight),1f);;
+		ButtonTexture[3].transform.localPosition = new Vector3(0.5f,(0.90f-buttonheight),1f);;
+		ButtonTexture[4].transform.localPosition = new Vector3(0.72f,(0.83f-buttonheight),1f);;
 		ButtonTexture[2].transform.localPosition = new Vector3(0.9f,(0.70f-buttonheight),1f);;
 		carpostion = (GetPostion)Car.GetComponent<GetPostion>();
 		ButtonTexture[5].GetComponent<GUITexture>().texture= sens01texture;
@@ -82,16 +82,16 @@ public class WtoStest : MonoBehaviour {
 	{
 		//buttonweizhi
 		ButtonPostion[5]=new Vector3(cameraA.pixelWidth*0.1f,cameraA.pixelHeight*(0.70f),1f);
-		ButtonPostion[1]=new Vector3(cameraA.pixelWidth*0.2f,cameraA.pixelHeight*(0.83f),1f);
-		ButtonPostion[0]=new Vector3(cameraA.pixelWidth*0.38f,cameraA.pixelHeight*(0.90f),1f);
-		ButtonPostion[3]=new Vector3(cameraA.pixelWidth*0.62f,cameraA.pixelHeight*(0.90f),1f);
-		ButtonPostion[4]=new Vector3(cameraA.pixelWidth*0.8f,cameraA.pixelHeight*(0.83f),1f);
+		ButtonPostion[1]=new Vector3(cameraA.pixelWidth*0.1f,cameraA.pixelHeight*(0.70f),1f);
+		ButtonPostion[0]=new Vector3(cameraA.pixelWidth*0.28f,cameraA.pixelHeight*(0.83f),1f);
+		ButtonPostion[3]=new Vector3(cameraA.pixelWidth*0.5f,cameraA.pixelHeight*(0.90f),1f);
+		ButtonPostion[4]=new Vector3(cameraA.pixelWidth*0.72f,cameraA.pixelHeight*(0.83f),1f);
 		ButtonPostion[2]=new Vector3(cameraA.pixelWidth*0.9f,cameraA.pixelHeight*(0.70f),1f);
 		ButtonTexture[5].transform.localPosition = new Vector3(0.1f,(0.70f),1f);
-		ButtonTexture[1].transform.localPosition = new Vector3(0.2f,(0.83f),1f);;
-		ButtonTexture[0].transform.localPosition = new Vector3(0.38f,(0.90f),1f);;
-		ButtonTexture[3].transform.localPosition = new Vector3(0.62f,(0.90f),1f);;
-		ButtonTexture[4].transform.localPosition = new Vector3(0.8f,(0.83f),1f);;
+		ButtonTexture[1].transform.localPosition = new Vector3(0.1f,(0.70f),1f);;
+		ButtonTexture[0].transform.localPosition = new Vector3(0.28f,(0.83f),1f);;
+		ButtonTexture[3].transform.localPosition = new Vector3(0.5f,(0.90f),1f);;
+		ButtonTexture[4].transform.localPosition = new Vector3(0.72f,(0.83f),1f);;
 		ButtonTexture[2].transform.localPosition = new Vector3(0.9f,(0.70f),1f);;
 		bani[0].init();
 		bani[1].init();
@@ -193,16 +193,16 @@ public class WtoStest : MonoBehaviour {
 		}
 		else{
 			ButtonPostion[5]= new Vector3(cameraA.pixelWidth*0.1f,cameraA.pixelHeight*(0.00f-buttonheight+tempy),1f);
-			ButtonPostion[1]=new Vector3(cameraA.pixelWidth*0.2f,cameraA.pixelHeight*(0.13f-buttonheight+tempy),1f);
-			ButtonPostion[0]=new Vector3(cameraA.pixelWidth*0.38f,cameraA.pixelHeight*(0.2f-buttonheight+tempy),1f);
-			ButtonPostion[3]=new Vector3(cameraA.pixelWidth*0.62f,cameraA.pixelHeight*(0.2f-buttonheight+tempy),1f);
-			ButtonPostion[4]=new Vector3(cameraA.pixelWidth*0.8f,cameraA.pixelHeight*(0.13f-buttonheight+tempy),1f);
+			ButtonPostion[1]=new Vector3(cameraA.pixelWidth*0.1f,cameraA.pixelHeight*(0.00f-buttonheight+tempy),1f);
+			ButtonPostion[0]=new Vector3(cameraA.pixelWidth*0.28f,cameraA.pixelHeight*(0.13f-buttonheight+tempy),1f);
+			ButtonPostion[3]=new Vector3(cameraA.pixelWidth*0.5f,cameraA.pixelHeight*(0.2f-buttonheight+tempy),1f);
+			ButtonPostion[4]=new Vector3(cameraA.pixelWidth*0.72f,cameraA.pixelHeight*(0.13f-buttonheight+tempy),1f);
 			ButtonPostion[2]=new Vector3(cameraA.pixelWidth*0.9f,cameraA.pixelHeight*(0.00f-buttonheight+tempy),1f);
 			ButtonTexture[5].transform.localPosition =Vector3.Lerp(ButtonTexture[5].transform.localPosition ,new Vector3(0.1f,(0.00f-buttonheight+tempy),1f),0.1f);
-			ButtonTexture[1].transform.localPosition =Vector3.Lerp(ButtonTexture[1].transform.localPosition , new Vector3(0.2f,(0.13f-buttonheight+tempy),1f),0.1f);
-			ButtonTexture[0].transform.localPosition =Vector3.Lerp(ButtonTexture[0].transform.localPosition , new Vector3(0.38f,(0.2f-buttonheight+tempy),1f),0.1f);
-			ButtonTexture[3].transform.localPosition =Vector3.Lerp(ButtonTexture[3].transform.localPosition ,new Vector3(0.62f,(0.2f-buttonheight+tempy),1f),0.1f);
-			ButtonTexture[4].transform.localPosition =Vector3.Lerp(ButtonTexture[4].transform.localPosition , new Vector3(0.8f,(0.13f-buttonheight+tempy),1f),0.1f);
+			ButtonTexture[1].transform.localPosition =Vector3.Lerp(ButtonTexture[1].transform.localPosition , new Vector3(0.1f,(0.00f-buttonheight+tempy),1f),0.1f);
+			ButtonTexture[0].transform.localPosition =Vector3.Lerp(ButtonTexture[0].transform.localPosition , new Vector3(0.28f,(0.13f-buttonheight+tempy),1f),0.1f);
+			ButtonTexture[3].transform.localPosition =Vector3.Lerp(ButtonTexture[3].transform.localPosition ,new Vector3(0.5f,(0.2f-buttonheight+tempy),1f),0.1f);
+			ButtonTexture[4].transform.localPosition =Vector3.Lerp(ButtonTexture[4].transform.localPosition , new Vector3(0.72f,(0.13f-buttonheight+tempy),1f),0.1f);
 			ButtonTexture[2].transform.localPosition =Vector3.Lerp(ButtonTexture[2].transform.localPosition , new Vector3(0.9f,(0.00f-buttonheight+tempy),1f),0.1f);
 		}
 //		ButtonPostion[0]= Vector3.Lerp(ButtonPostion[0],new Vector3(cameraA.pixelWidth*0.1f,cameraA.pixelHeight*(0.00f-buttonheight+tempy),1f),0.9f);
