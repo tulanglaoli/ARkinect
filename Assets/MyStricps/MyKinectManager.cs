@@ -1932,7 +1932,8 @@ public class MyKinectManager : MonoBehaviour
 					Vector3 tempv = new Vector3(-(-posJoint.x*Math.Abs(CameraPlane.transform.localScale.x*10)/1920+Math.Abs(CameraPlane.transform.localScale.x*10)/2),-posJoint.y*Math.Abs(CameraPlane.transform.localScale.z*10)/1080+Math.Abs(CameraPlane.transform.localScale.z*10)/2,Math.Abs(CameraPlane.transform.localPosition.z));
 
 
-					TestGobject[i].transform.localPosition = Vector3.Lerp(tempv,gameObject.transform.localPosition,(2-bodyData.joint[i].kinectPos.z)/2);
+					TestGobject[i].transform.localPosition = Vector3.Lerp(tempv,gameObject.transform.localPosition,(5-bodyData.joint[i].kinectPos.z)/5);
+					//Debug.Log(bodyData.joint[i].kinectPos.z);
 					//TestGobject[i].transform.localPosition = new Vector3( 100*bodyData.joint[i].kinectPos.x,100*bodyData.joint[i].kinectPos.y,100*bodyData.joint[i].kinectPos.z);
 				}
 

@@ -164,7 +164,12 @@ public class KinectPointController : MonoBehaviour {
 		Vector3 tempscreenpos = Maincamera.WorldToScreenPoint(_bones[1].transform.position);
 		//如果上一次的骨骼位置没有发生变化，说明可能没有人，开始TimeCount计时
         //if ((_bones[6].transform.position ==LastVector)||(_bones[7].transform.position.y<_bones[1].transform.position.y+Stopfloat &&_bones[11].transform.position.y<_bones[1].transform.position.y+Stopfloat)||_bones[1].transform.localPosition.z>Maxdis)//||!(ScreenVector.x>Maincamera.pixelWidth*0.3&&ScreenVector.x<Maincamera.pixelWidth*0.7&&ScreenVector.y>Maincamera.pixelHeight*0.3&&ScreenVector.y<Maincamera.pixelHeight*0.7))
-		if(Maincamera.GetComponent<MyKinectManager>().IsUserGet()==0||(Maincamera.GetComponent<MyKinectManager>().IsUserGet()>0&&((tempscreenpos.x<Maincamera.pixelWidth*0.1||tempscreenpos.x>Maincamera.pixelWidth*0.9)||(_bones[7].transform.position.y<_bones[12].transform.position.y+Stopfloat&&_bones[11].transform.position.y<_bones[16].transform.position.y+Stopfloat))))
+		if(Maincamera.GetComponent<MyKinectManager>().IsUserGet()==0||
+		   (Maincamera.GetComponent<MyKinectManager>().IsUserGet()>0&&
+		 ((tempscreenpos.x<Maincamera.pixelWidth*0.2||tempscreenpos.x>Maincamera.pixelWidth*0.8)
+		 ||(_bones[7].transform.position.y<_bones[12].transform.position.y+Stopfloat&&
+		   _bones[11].transform.position.y<_bones[16].transform.position.y+Stopfloat)||
+		 (_bones[1].transform.position.z>GetDebugPlane.transform.localPosition.z/2))))
 		{
 
             TimeCount += Time.deltaTime;
@@ -263,7 +268,7 @@ public class KinectPointController : MonoBehaviour {
 			for (int ii = 0; ii < (int)20/*Kinect.NuiSkeletonPositionIndex.Count*/; ii++)
             {
                 //_bonePos[ii] = sw.getBonePos(ii);
-                if (((uint)Mask & (uint)(1 << ii)) > 0 )//&& (ii==0||ii == 6 || ii == 7 || ii == 10 || ii == 11))
+                if (((uint)Mask & (uint)(1 << ii)) > 0)//&& (ii==0||ii == 6 || ii == 7 || ii == 10 || ii == 11))
                 {
                     
                     ///_bones[ii].transform.localPosition =Vector3.Lerp( Temp,new Vector3(sw.bonePos[player, ii].x, sw.bonePos[player, ii].y, -sw.bonePos[player, ii].z),0.1f);

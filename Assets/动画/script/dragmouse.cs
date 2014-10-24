@@ -17,9 +17,11 @@ public class dragmouse : MonoBehaviour {
 	public GameObject center;
 	public GameObject handL;
 	public GameObject handR;
+	public Texture Testview;
+	Rect usersClrRect;
 	// Use this for initialization
 	void Start () {
-	
+
 	}
 	
 	// Update is called once per frame
@@ -123,6 +125,9 @@ public class dragmouse : MonoBehaviour {
 	{
 		if(Debugmod==1)
 		{
+			//测试画面
+			GUI.DrawTexture(new Rect(Camera.main.pixelRect.width*0.55f,Camera.main.pixelRect.height*0.75f,Camera.main.pixelRect.width*0.45f,Camera.main.pixelRect.height*0.25f),Testview);
+			//按钮位置
 			GUI.Box(new Rect(0.4f*MainC.pixelWidth,0.30f*MainC.pixelHeight,0.2f*MainC.pixelWidth,0.15f*MainC.pixelHeight),"Button");
 //			GUI.TextField(new Rect(70,370,100,30),"center:"+center.transform.position.y.ToString());
 //			GUI.TextField(new Rect(70,410,100,30),"left:"+handL.transform.position.y.ToString());
@@ -142,6 +147,7 @@ public class dragmouse : MonoBehaviour {
 			if(GUI.Button (new Rect(10,130,100,30), "changeheight"))
 			{
 			    Wts.buttonheight = float.Parse(stringToEdit3);
+				stringtodeit5 = kpc.Stopfloat.ToString();
 				//GP.Rate = float.Parse( stringtoedit4);
 				//kpc.Stopfloat= float.Parse( stringtodeit5);
 			}
@@ -166,7 +172,7 @@ public class dragmouse : MonoBehaviour {
 //				Class1.XMLWrite("init","Rate",0,stringtoedit4);
 
 				Class1.XMLWrite("init","stopfloat",0,stringtodeit5);
-				stringtodeit5 = kpc.Stopfloat.ToString();
+
 			}
 			if(GUI.Button(new Rect(10,250,100,30), "load"))
 			{
