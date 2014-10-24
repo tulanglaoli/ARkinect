@@ -26,11 +26,12 @@ public class WtoStest : MonoBehaviour {
 	public GameObject Car;
 	GetPostion carpostion;
 	public GameObject GUGEhand;
+	MyKinectManager mkm;
 	// Use this for initialization
 	void Start () {
 		
 		sen01. transform.localScale = new Vector3(0.0F, 0.00f, 0.00f);
-		
+		mkm = cameraA.GetComponent<MyKinectManager> ();
 //		go=ListTexture[1];
 //		light=ListTexture[3];
 //		rotate =ListTexture[5];
@@ -176,7 +177,7 @@ public class WtoStest : MonoBehaviour {
 	public void initbutton()
 	{
 		
-		tempy = cameraA.WorldToScreenPoint(GUGEhand.transform.position).y/cameraA.pixelHeight;
+		tempy = cameraA.WorldToScreenPoint(ReturnHumanPostion()).y/cameraA.pixelHeight;
 		if(IschangeSens){//015342
 		ButtonPostion[0]= new Vector3(cameraA.pixelWidth*0.1f,cameraA.pixelHeight*(0.00f-buttonheight+tempy),1f);
 		ButtonPostion[1]=new Vector3(cameraA.pixelWidth*0.2f,cameraA.pixelHeight*(0.13f-buttonheight+tempy),1f);
@@ -685,6 +686,37 @@ public class WtoStest : MonoBehaviour {
 //		GUI.Button (new Rect(ButtonPostion[3].x,cameraA.pixelHeight-ButtonPostion[3].y,cameraA.pixelWidth*0.01f,cameraA.pixelWidth*0.01f),sen);
 //		GUI.Button (new Rect(ButtonPostion[4].x,cameraA.pixelHeight-ButtonPostion[4].y,cameraA.pixelWidth*0.01f,cameraA.pixelWidth*0.01f),sen);
 //		
+	}
+
+	Vector3[] ListPostion = new Vector3[10];
+	int vectori=0;
+	Vector3 ReturnHumanPostion()
+	{
+		vectori = (1+vectori);
+		ListPostion [vectori%10] = Vector3Postionmean ();
+		if(vectori>10)
+		{
+			return new Vector3((ListPostion[0].x+ListPostion[1].x+ListPostion[2].x+ListPostion[3].x+ListPostion[4].x+
+			                   ListPostion[5].x+ListPostion[6].x+ListPostion[7].x+ListPostion[8].x+ListPostion[9].x)/10,
+			                   (ListPostion[0].y+ListPostion[1].y+ListPostion[2].y+ListPostion[3].y+ListPostion[4].y+
+			                   ListPostion[5].y+ListPostion[6].y+ListPostion[7].y+ListPostion[8].y+ListPostion[9].y)/10,
+			                   (ListPostion[0].z+ListPostion[1].z+ListPostion[2].z+ListPostion[3].z+ListPostion[4].z+
+			                   ListPostion[5].z+ListPostion[6].z+ListPostion[7].z+ListPostion[8].z+ListPostion[9].z)/10
+			                   );
+		}
+		else
+			return Vector3Postionmean();
+
+	}
+
+	Vector3 Vector3Postionmean()
+	{
+		return new Vector3((mkm.TestGobject[0].transform.position.x+mkm.TestGobject[1].transform.position.x
+		                    +mkm.TestGobject[2].transform.position.x+mkm.TestGobject[3].transform.position.x)/4,
+		                    (mkm.TestGobject[0].transform.position.y+mkm.TestGobject[1].transform.position.y
+		                    +mkm.TestGobject[2].transform.position.y+mkm.TestGobject[3].transform.position.y)/4,
+		                    (mkm.TestGobject[0].transform.position.z+mkm.TestGobject[1].transform.position.z
+		                    +mkm.TestGobject[2].transform.position.z+mkm.TestGobject[3].transform.position.z)/4);
 	}
 	
 	

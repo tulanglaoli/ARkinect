@@ -1736,6 +1736,8 @@ public class MyKinectManager : MonoBehaviour
 		return UserCount;
 	}
 
+
+
 	// Adds UserId to the list of users
     void CalibrateUser(Int64 userId, int bodyIndex)
     {
@@ -1898,10 +1900,36 @@ public class MyKinectManager : MonoBehaviour
 					DrawLine(aTexture, (int)posParent.x, (int)posParent.y, (int)posJoint.x, (int)posJoint.y, Color.yellow);
 				}
 			}
-		}
-		
+		}	
 		//aTexture.Apply();
 	}
+
+	float postionZ;
+	public float returnZ()
+	{
+
+		return postionZ;
+	}
+
+	public float angle_left()
+	{
+		float angle_left = Vector2.Angle (new Vector2(TestGobject[4].transform.localPosition.y-TestGobject[6].transform.localPosition.y,
+		                           						TestGobject[4].transform.localPosition.z-TestGobject[6].transform.localPosition.z),
+		                                  new Vector2(TestGobject[1].transform.localPosition.y-TestGobject[0].transform.localPosition.y,
+		           		 								TestGobject[1].transform.localPosition.z-TestGobject[0].transform.localPosition.z));
+		return angle_left;
+	}
+
+	public float angle_Right()
+	{
+		float angle_Right = Vector2.Angle (new Vector2(TestGobject[8].transform.localPosition.y-TestGobject[10].transform.localPosition.y,
+		                                              TestGobject[8].transform.localPosition.z-TestGobject[10].transform.localPosition.z),
+		                                  new Vector2(TestGobject[1].transform.localPosition.y-TestGobject[0].transform.localPosition.y,
+		            								  TestGobject[1].transform.localPosition.z-TestGobject[0].transform.localPosition.z));
+		return angle_Right;
+	}
+
+
 
 	private void DrawSkeletonInColor(Texture2D aTexture, ref KinectInterop.BodyData bodyData)
 	{
@@ -1931,8 +1959,9 @@ public class MyKinectManager : MonoBehaviour
 					//返回他的对称位置
 					Vector3 tempv = new Vector3(-(-posJoint.x*Math.Abs(CameraPlane.transform.localScale.x*10)/1920+Math.Abs(CameraPlane.transform.localScale.x*10)/2),-posJoint.y*Math.Abs(CameraPlane.transform.localScale.z*10)/1080+Math.Abs(CameraPlane.transform.localScale.z*10)/2,Math.Abs(CameraPlane.transform.localPosition.z));
 
+					postionZ = bodyData.joint[1].kinectPos.z;
 
-					TestGobject[i].transform.localPosition = Vector3.Lerp(tempv,gameObject.transform.localPosition,(5-bodyData.joint[i].kinectPos.z)/5);
+					TestGobject[i].transform.localPosition = Vector3.Lerp(tempv,gameObject.transform.localPosition,(bodyData.joint[1].kinectPos.z-bodyData.joint[i].kinectPos.z));
 					//Debug.Log(bodyData.joint[i].kinectPos.z);
 					//TestGobject[i].transform.localPosition = new Vector3( 100*bodyData.joint[i].kinectPos.x,100*bodyData.joint[i].kinectPos.y,100*bodyData.joint[i].kinectPos.z);
 				}

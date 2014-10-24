@@ -21,7 +21,7 @@ public class dragmouse : MonoBehaviour {
 	Rect usersClrRect;
 	// Use this for initialization
 	void Start () {
-
+		tempV = new Vector3 (0, 0, 0);
 	}
 	
 	// Update is called once per frame
@@ -34,7 +34,7 @@ public class dragmouse : MonoBehaviour {
 				Debugmod = 1;
 			else
 				Debugmod = 0;
-					}
+		}
 		else 
 			
 //		if(Input.GetKey(KeyCode.Q))
@@ -84,10 +84,7 @@ public class dragmouse : MonoBehaviour {
 //			dragobj.transform.Rotate(-0.2f,0,0,Space.World);
 //			//dragobj.transform.localScale -= new Vector3(0,0,0.01f);
 //		}
-		
-		
 		mouserecord = new Vector3(Input.mousePosition.x/MainC.pixelWidth,Input.mousePosition.y/MainC.pixelHeight,0);
-
 	}
 	
 	void OnMouseDrag() {
@@ -120,7 +117,6 @@ public class dragmouse : MonoBehaviour {
 	string stringtoedit4 = "1";
 	string stringtodeit5 = "0";
 	Vector3 tempV;
-	float tempp;
 	void OnGUI()
 	{
 		if(Debugmod==1)
@@ -140,14 +136,16 @@ public class dragmouse : MonoBehaviour {
 //				StringToEdit2 = dragobj.transform.rotation.eulerAngles.x.ToString();
 //				
 //			}
-//			GUI.TextField(new Rect(10,50,100,30),"Kinect_angle:");
-//			 stringToEdit =  GUI.TextArea(new Rect(120,50,70,30),stringToEdit,100);
-//			GUI.TextField(new Rect(10,90,100,30),"Guge_angle:");
-//			StringToEdit2 =  GUI.TextArea(new Rect(120,90,70,30),StringToEdit2,100);
+			GUI.TextField(new Rect(10,50,100,30),"range_In:");
+			tempV.x = float.Parse(GUI.TextArea(new Rect(120,50,70,30),tempV.x.ToString(),100));
+			GUI.TextField(new Rect(10,90,100,30),"range_Leave:");
+			tempV.y = float.Parse(GUI.TextArea(new Rect(120,90,70,30),tempV.y.ToString(),100));
 			if(GUI.Button (new Rect(10,130,100,30), "changeheight"))
 			{
 			    Wts.buttonheight = float.Parse(stringToEdit3);
-				stringtodeit5 = kpc.Stopfloat.ToString();
+				kpc.moverange.x = tempV.x;
+				kpc.moverange.y = tempV.y;
+
 				//GP.Rate = float.Parse( stringtoedit4);
 				//kpc.Stopfloat= float.Parse( stringtodeit5);
 			}
@@ -159,13 +157,14 @@ public class dragmouse : MonoBehaviour {
 			stringtodeit5 = GUI.TextArea(new Rect(120,330,70,30),stringtodeit5,100);
 			if(GUI.Button(new Rect(10,210,100,30), "save"))
 			{
+				stringtodeit5 = kpc.Stopfloat.ToString();
 //				Class1.XMLWrite("init","anglecam",0,stringToEdit);
 //				Class1.XMLWrite("init","anglekin",0,StringToEdit2);
 				Class1.XMLWrite("init","height",0,stringToEdit3);
 //				tempp = dragobj.transform.localPosition.x;
-//				Class1.XMLWrite("init","postionx",0,tempp.ToString());
+				Class1.XMLWrite("init","postionx",0,tempV.x.ToString());
 //				tempp = dragobj.transform.localPosition.y;
-//				Class1.XMLWrite("init","postiony",0,tempp.ToString());
+				Class1.XMLWrite("init","postiony",0,tempV.y.ToString());
 //				tempp = dragobj.transform.localPosition.z;
 //				Class1.XMLWrite("init","postionz",0,tempp.ToString());
 //				stringtoedit4 = GP.Rate.ToString();
@@ -179,8 +178,8 @@ public class dragmouse : MonoBehaviour {
 //				stringToEdit=Class1.XMLRead("init","anglecam",0);
 //				StringToEdit2=Class1.XMLRead("init","anglekin",0);
 				stringToEdit3=Class1.XMLRead("init","height",0);
-//				tempV.x = float.Parse( Class1.XMLRead("init","postionx",0));
-//				tempV.y = float.Parse( Class1.XMLRead("init","postiony",0));
+				tempV.x = float.Parse( Class1.XMLRead("init","postionx",0));
+				tempV.y = float.Parse( Class1.XMLRead("init","postiony",0));
 //				tempV.z = float.Parse( Class1.XMLRead("init","postionz",0));
 //				stringtoedit4 = Class1.XMLRead("init","Rate",0);
 				stringtodeit5 = Class1.XMLRead("init","stopfloat",0);

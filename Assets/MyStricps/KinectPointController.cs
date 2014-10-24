@@ -102,6 +102,7 @@ public class KinectPointController : MonoBehaviour {
 		WS.A=1;
 		tempdrag = (dragmouse)GetDebugPlane.GetComponent<dragmouse>();//GameObject.GetComponent<T>()GetComponent("dragmouse")
 		MkM = (MyKinectManager)Maincamera.GetComponent<MyKinectManager> ();
+		moverange = new Vector2 (1,3);
 	}
 	
 	// Update is called once per frame
@@ -124,6 +125,7 @@ public class KinectPointController : MonoBehaviour {
 	public float Maxdis = 0f;
 	public WtoStest WtS;
 	public float Stopfloat;
+	public Vector2 moverange;
 	void Update () {
         
 		if(tempdrag.ReturnDebug()==1)
@@ -162,14 +164,14 @@ public class KinectPointController : MonoBehaviour {
 			}
 		//否则背景不打开
 		Vector3 tempscreenpos = Maincamera.WorldToScreenPoint(_bones[1].transform.position);
+		Debug.Log (MkM.returnZ () < moverange.x || MkM.returnZ () > moverange.y);
 		//如果上一次的骨骼位置没有发生变化，说明可能没有人，开始TimeCount计时
         //if ((_bones[6].transform.position ==LastVector)||(_bones[7].transform.position.y<_bones[1].transform.position.y+Stopfloat &&_bones[11].transform.position.y<_bones[1].transform.position.y+Stopfloat)||_bones[1].transform.localPosition.z>Maxdis)//||!(ScreenVector.x>Maincamera.pixelWidth*0.3&&ScreenVector.x<Maincamera.pixelWidth*0.7&&ScreenVector.y>Maincamera.pixelHeight*0.3&&ScreenVector.y<Maincamera.pixelHeight*0.7))
 		if(Maincamera.GetComponent<MyKinectManager>().IsUserGet()==0||
 		   (Maincamera.GetComponent<MyKinectManager>().IsUserGet()>0&&
 		 ((tempscreenpos.x<Maincamera.pixelWidth*0.2||tempscreenpos.x>Maincamera.pixelWidth*0.8)
-		 ||(_bones[7].transform.position.y<_bones[12].transform.position.y+Stopfloat&&
-		   _bones[11].transform.position.y<_bones[16].transform.position.y+Stopfloat)||
-		 (_bones[1].transform.position.z>GetDebugPlane.transform.localPosition.z/2))))
+		 ||(MkM.angle_left()<12f+Stopfloat&&MkM.angle_Right()<12f+Stopfloat)||//_bones[7].transform.position.y<_bones[12].transform.position.y+Stopfloat&&_bones[11].transform.position.y<_bones[16].transform.position.y+Stopfloat
+		 (MkM.returnZ()<moverange.x||MkM.returnZ()>moverange.y))))
 		{
 
             TimeCount += Time.deltaTime;
